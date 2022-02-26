@@ -1,25 +1,30 @@
-from rich.console import Console
+from rich import print
+from rich.panel import Panel
 from menu import Menu
 from clean_console import clean_console
 # Add here another imports
 # Consider PEP 8 for imorts -> https://www.python.org/dev/peps/pep-0008/#imports
 
-clean_console()
-console = Console()
-
 # Set menu options.
 # By default, last option will be Exit, there's no need to specify it.
 # Menu options will be auto numerated
-options = """
+OPTIONS = """
 Option 1
 Option 2
 Option 3
 """
-menu = Menu(options)
+
+clean_console()
+menu = Menu(OPTIONS)
+menu_options = Panel(menu.get_menu(),
+                     expand=False,
+                     title="[bold] M E N U [/]",
+                     padding=(1, 5, 0, 2),
+                     highlight=True)
 
 option = ""
 while option != "Exit":
-    console.print(menu.get_menu())
+    print(menu_options)
     option = menu.request_option() 
     if option == 1:
         # Code for option 1

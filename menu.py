@@ -30,9 +30,8 @@ class Menu:
         opt_lines = options.splitlines()
         opt_lines.pop(0)
         opt_lines.append('Exit')
-        self.menu = "[white on red]     M E N U     [/]"
         for opt_no, opt_line in enumerate(opt_lines, start=1):
-            self.menu += f"\n [yellow]{opt_no}[/] - {opt_line}"
+            self.menu += f"[yellow bold]{opt_no}[/] - {opt_line}\n"
         self.valid_options = range(1, len(opt_lines)+1)
 
     def get_menu(self) -> str:
@@ -44,14 +43,14 @@ class Menu:
         
         Return:
         -------
-        self.chosen_option: int
+        chosen_option: int
             User input.
-            0 if the input is not a valid option.
+            None if the input is not a valid option.
         """
         try:
             chosen_option = int(input("Input option number: "))
         except ValueError:
-            chosen_option = 0
+            chosen_option = None
         option_is_valid = chosen_option in self.valid_options
         if option_is_valid:
             if chosen_option == self.valid_options[-1]:
